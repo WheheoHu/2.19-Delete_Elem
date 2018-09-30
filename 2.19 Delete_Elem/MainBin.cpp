@@ -10,12 +10,17 @@ const int SIZEOFLIST = 30;
 #include <iostream>
 #include "linearlinkedlist.h"
 
+void Delete_elem(Linear_Linked_List<int> LLList);
+
 int main() {
 	Linear_Linked_List<int> LLList(0);
 	for (int i = 0; i <SIZEOFLIST ; i++)
 	{
 		LLList.ListInsert(i + 2, i + 1);
 	}
+	
+	//Delete_elem(LLList);
+
 	for (int i = 0; i < LLList.ListLength(); i++)
 	{
 		std::cout << LLList.GetElem(i + 1) << std::endl;
@@ -23,3 +28,9 @@ int main() {
 	system("pause");
 	return 0;
 }
+
+
+//void Delete_elem(Linear_Linked_List<int> LLList)
+//{
+//	
+//}
