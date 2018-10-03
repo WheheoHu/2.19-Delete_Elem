@@ -2,7 +2,7 @@
 //试写一高效的算法，删除表中所有值大于mink且小于maxk的元素（若表中存在这样的元素），
 //同时释放被删结点空间，并分析你的算法的时间复杂度
 //（注意，mink和maxk是给定的两个参变量，它们的值可以和表中的元素相同，也可以不同）。 
-
+//git崩了,难受
 const int mink = 10;
 const int maxk = 15;
 const int SIZEOFLIST = 30;
