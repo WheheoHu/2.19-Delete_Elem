@@ -3,7 +3,7 @@
 //同时释放被删结点空间，并分析你的算法的时间复杂度
 //（注意，mink和maxk是给定的两个参变量，它们的值可以和表中的元素相同，也可以不同）。 
 
-const int mink = 10;
+const int mink = 1;
 const int maxk = 25;
 const int SIZEOFLIST = 30;
 
