@@ -24,14 +24,9 @@ int main() {
 
 	for (int i = 0; i < LLList.ListLength(); i++)
 	{
-		std::cout << LLList.GetElem(i + 1) << std::endl;
+		std::cout << LLList.GetElem(i + 1) << std::endl;                                                                                                                                       
 	}
 	system("pause");
 	return 0;
 }
 
-
-//void Delete_elem(Linear_Linked_List<int> LLList)
-//{
-//	
-//}
