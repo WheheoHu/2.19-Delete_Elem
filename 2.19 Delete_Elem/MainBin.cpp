@@ -19,6 +19,7 @@ int main() {
 		LLList.ListInsert(i + 2, i + 1);
 	}
 	//LLList.ListDelete(LLList.ListLength());
+
 	Delete_elem(LLList, mink, maxk);
 
 	for (int i = 0; i < LLList.ListLength(); i++)
