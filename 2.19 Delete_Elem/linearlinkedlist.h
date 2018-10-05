@@ -1,16 +1,23 @@
 #pragma once
 #include <iostream>
 
+template<typename T>
+struct Node {
+	T data;
+	Node * next;
+	Node(const T &d) :data(d), next(NULL) {}
+};
 
 template<class T>
 class Linear_Linked_List
 {
 public:
+
 	Linear_Linked_List();
 	Linear_Linked_List(T elem);
 	~Linear_Linked_List();
 	void InitList(T firstelem);
-	void DestoryList(); 
+	void DestoryList();
 	bool ListEmpty();
 	int ListLength();
 	T GetElem(int location);
@@ -18,26 +25,24 @@ public:
 	int ListInsert(int location, T elem);
 	int ListDelete(int location, T& elem);
 	int ListDelete(int location);
-
+	Node<T> *HeadPoint;
+	Node<T> *EndPoint;
+	Node<T> * getEndPoint();
 private:
-	struct Node {
-		         T data;
-		         Node * next;
-		         Node(const T &d) :data(d), next(NULL) {}	
-	};
-	Node * head;
+
+	Node<T> * head;
 	//寻找第location个Node前一个Node的位置！！！！
-	Node * find(const int &location) {
-		Node *locaNode = head;
-		if (location==1)
+	Node<T> * find(const int &location) {
+		Node<T> *locateNode = head;
+		if (location == 1)
 		{
-			return locaNode;
+			return locateNode;
 		}
-		for (int i = 0; i < location-2; i++)
+		for (int i = 0; i < location - 2; i++)
 		{
-			locaNode = locaNode->next;
+			locateNode = locateNode->next;
 		}
-		return locaNode;
+		return locateNode;
 	}
 };
 
@@ -62,17 +67,18 @@ inline Linear_Linked_List<T>::~Linear_Linked_List()
 template<class T>
 inline void Linear_Linked_List<T>::InitList(T firstelem)
 {
-	head = new Node(firstelem);
+	head = new Node<T>(firstelem);
+	HeadPoint = head;
 }
 
 template<class T>
 inline void Linear_Linked_List<T>::DestoryList()
 {
-	Node *p = head;
-	
+	Node<T> *p = head;
+
 	while (p)
 	{
-		Node *q = p->next;
+		Node<T> *q = p->next;
 		delete p;
 		p = q;
 	}
@@ -88,8 +94,8 @@ template<class T>
 inline int Linear_Linked_List<T>::ListLength()
 {
 	int listlenght = 0;
-	Node *p = head;
-	while (p!=NULL)
+	Node<T> *p = head;
+	while (p != NULL)
 	{
 		p = p->next;
 		listlenght++;
@@ -105,8 +111,8 @@ inline T Linear_Linked_List<T>::GetElem(int location)
 	{
 		p = p->next;
 	}*/
-	Node *p = find(location);
-	if (location==1)
+	Node<T> *p = find(location);
+	if (location == 1)
 	{
 		return p->data;
 	}
@@ -118,13 +124,13 @@ inline int Linear_Linked_List<T>::locateElem(T elem)
 {
 	Node *targetNode = head;
 	int location = 1;
-	while (targetNode->data != elem&&targetNode->next!=NULL)
+	while (targetNode->data != elem && targetNode->next != NULL)
 	{
-		targetNode=targetNode->next;
+		targetNode = targetNode->next;
 		location++;
 
 	}
-	if (targetNode->next==NULL)
+	if (targetNode->next == NULL)
 	{
 		return 0;
 	}
@@ -134,51 +140,51 @@ inline int Linear_Linked_List<T>::locateElem(T elem)
 template<class T>
 inline int Linear_Linked_List<T>::ListInsert(int location, T elem)
 {
-	Node *InsertNode =new Node(elem);
-	if (location==1)
+	Node<T> *InsertNode = new Node<T>(elem);
+	if (location == 1)
 	{
 		InsertNode->next = head;
-		
+
 		head = InsertNode;
 		return 1;
 	}
-	if (location>ListLength())
+	if (location > ListLength())
 	{
-		Node *lastNode = head;
-		for (int  i = 0; i < ListLength()-1; i++)
+		Node<T> *lastNode = head;
+		for (int i = 0; i < ListLength() - 1; i++)
 		{
 			lastNode = lastNode->next;
 		}
 		lastNode->next = InsertNode;
 		return 1;
 	}
-	Node *PreNode = head;
-	for (int  i = 0; i < location-2; i++)
+	Node<T> *PreNode = head;
+	for (int i = 0; i < location - 2; i++)
 	{
-		PreNode=PreNode->next;
+		PreNode = PreNode->next;
 	}
-	 InsertNode->next = PreNode->next;
-	 PreNode->next = InsertNode;
-	 return 1;
+	InsertNode->next = PreNode->next;
+	PreNode->next = InsertNode;
+	return 1;
 }
 
 template<class T>
 inline int Linear_Linked_List<T>::ListDelete(int location, T & elem)
 {
 	Node *deleteNode = head;
-	if (location==1)
+	if (location == 1)
 	{
 		elem = deleteNode->data;
 		free(head);
 		head = deleteNode->next;
 		return 1;
 	}
-	for (int i = 0; i < location-1; i++)
+	for (int i = 0; i < location - 1; i++)
 	{
 		deleteNode = deleteNode->next;
 	}
 	Node *tempNode = deleteNode;
-	
+
 	elem = deleteNode->next->data;
 	free(tempNode);
 	deleteNode->next == deleteNode->next->next;
@@ -188,17 +194,17 @@ inline int Linear_Linked_List<T>::ListDelete(int location, T & elem)
 template<class T>
 inline int Linear_Linked_List<T>::ListDelete(int location)
 {
-	if (ListLength()==0||location<1||location>ListLength())
+	if (ListLength() == 0 || location<1 || location>ListLength())
 	{
 		return 0;
 	}
-	if (location==1)
+	if (location == 1)
 	{
 		head = head->next;
 		return 1;
 	}
 	Node *deleteNode = head;
-	for (int i = 0; i < location-2; i++)
+	for (int i = 0; i < location - 2; i++)
 	{
 		deleteNode = deleteNode->next;
 	}
@@ -208,4 +214,16 @@ inline int Linear_Linked_List<T>::ListDelete(int location)
 	tempNode = NULL;
 	return 1;
 }
+
+template<class T>
+inline Node<T> * Linear_Linked_List<T>::getEndPoint()
+{
+	EndPoint = head;
+	for (size_t i = 0; i < ListLength() - 1; i++)
+	{
+		EndPoint = EndPoint->next;
+	}
+	return EndPoint;
+}
+
 
